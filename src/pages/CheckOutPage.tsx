@@ -3,13 +3,13 @@ import { useAppSelector } from "../redux/hooks";
 import { useCreteOrderMutation } from "../redux/api/api";
 
 export default function CheckOutPage() {
-  const [createOrder] = useCreteOrderMutation()
+  const [createOrder] = useCreteOrderMutation();
   // State for user input
   const [user, setUser] = useState({
-    name: "Fahim Ahammed",
-    email: "fahim@ph.com",
+    name: "Moniruzzaman Monir",
+    email: "monir@gmail.com",
     phone: "0123456789",
-    address: "Dhaka, Bangladesh",
+    address: "Mymensingh, Bangladesh",
   });
 
   // Replace this with actual selector from your Redux store // Replace with your Redux selector
@@ -34,12 +34,13 @@ export default function CheckOutPage() {
     try {
       const res = await createOrder(data).unwrap();
       if (res.success) {
-        console.log(res)
+        console.log(res);
+        window.location.href = res?.data?.payment_url;
       } else {
-        console.error('Order creation failed:', res.message);
+        console.error("Order creation failed:", res.message);
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
@@ -136,8 +137,7 @@ export default function CheckOutPage() {
         <div className="flex justify-end">
           <button
             type="submit"
-            className="bg-green-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-green-700 transition duration-300"
-          >
+            className="bg-green-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-green-700 transition duration-300">
             Proceed to Payment
           </button>
         </div>
